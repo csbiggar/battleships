@@ -1,13 +1,12 @@
 const val NUMBER_OF_BOAT_SQUARES = 18
 
-val BOARD = listOf(
-    Coordinate('A', 1)
-)
-
 fun createRow(letter: Char) = (0..9).toList().map { Coordinate(letter, it) }
 fun createBoard() = ('A'..'J').toList().flatMap { createRow(it) }
 
-tailrec fun doTheThing(previousResults: Results, board: List<Coordinate>): Results {
+tailrec fun doTheThing(
+    previousResults: Results,
+    board: List<Coordinate>
+): Results {
     println(previousResults.size)
     val nextGuess = findNextGuess(previousResults, board)
     val newResults = makeAGuess(previousResults, nextGuess, createShoot(HttpClient()))
