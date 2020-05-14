@@ -11,8 +11,11 @@ enum class Status {
 
 fun createShoot(httpClient: HttpClient): Shoot {
     return fun(coordinates: List<Coordinate>): List<Result> {
-        val result = httpClient.get("")
-        return coordinates.map { Result(it, Status.HIT) }
+        val statuses = mapResults(httpClient.get(""))
+        
+        return coordinates
+            .zip(statuses)
+            .map { (coordinate, status) -> Result(coordinate, status) }
     }
 }
 
