@@ -1,10 +1,10 @@
 import com.github.salomonbrys.kotson.get
 import com.google.gson.JsonParser
 
-typealias Shoot = (List<Coordinate>) -> List<Result>
+typealias Shoot = (List<Coordinate>) -> Results
 
-data class Coordinate(val x: String, val y: String)
-data class Result(val coordinate: Coordinate, val status: Status)
+data class Coordinate(val x: Char, val y: Int)
+
 enum class Status {
     HIT, MISS, SUNK
 }

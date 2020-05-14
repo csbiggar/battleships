@@ -13,11 +13,11 @@ internal class ShootKtTest {
 
         val shoot = createShoot(httpClient)
 
-        val result = shoot(listOf(Coordinate("B", "5"), Coordinate("C", "6")))
+        val result = shoot(listOf(Coordinate('B', 5), Coordinate('C', 6)))
 
         assertThat(result).containsExactly(
-            Result(Coordinate("B", "5"), HIT),
-            Result(Coordinate("C", "6"), MISS)
+            Result(Coordinate('B', 5), HIT),
+            Result(Coordinate('C', 6), MISS)
         )
     }
 
