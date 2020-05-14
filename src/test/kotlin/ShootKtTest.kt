@@ -1,6 +1,7 @@
 import Status.*
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.slot
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -9,7 +10,8 @@ internal class ShootKtTest {
     @Test
     fun `should find a hit at B5`() {
         val httpClient = mockk<HttpClient>()
-        every { httpClient.get(any()) } returns """{ "results": ["H","M"] }"""
+        val urlSlot = slot<String>()
+        every { httpClient.get(capture(urlSlot)) } returns """{ "results": ["H","M"] }"""
 
         val shoot = createShoot(httpClient)
 
@@ -19,6 +21,7 @@ internal class ShootKtTest {
             Result(Coordinate('B', 5), HIT),
             Result(Coordinate('C', 6), MISS)
         )
+        assertThat(urlSlot.captured).isEqualTo("https://challenge27.appspot.com/?shots=B5C6")
     }
 
     @Test

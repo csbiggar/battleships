@@ -11,7 +11,11 @@ enum class Status {
 
 fun createShoot(httpClient: HttpClient): Shoot {
     return fun(coordinates: List<Coordinate>): List<Result> {
-        val statuses = mapResults(httpClient.get(""))
+        val url = coordinates.map {
+            "${it.x}${it.y}"
+        }.joinToString("", "https://challenge27.appspot.com/?shots=")
+
+        val statuses = mapResults(httpClient.get(url))
 
         return coordinates
             .zip(statuses)
