@@ -7,12 +7,14 @@ enum class Status {
 }
 
 fun createShoot(httpClient: HttpClient): Shoot {
-    return fun(coordinate: List<Coordinate>): List<Result> {
-        return emptyList()
+    return fun(coordinates: List<Coordinate>): List<Result> {
+        return coordinates.map { Result(it, Status.HIT) }
     }
 }
 
 
 class HttpClient {
-
+    fun get(urlToGet: String): String {
+        return khttp.get(urlToGet).text
+    }
 }
